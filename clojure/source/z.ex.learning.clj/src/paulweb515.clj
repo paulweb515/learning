@@ -61,6 +61,10 @@
   [stop-words]
   (complement (contains? stop-words "that")))
 
+; this should work
+(def not-zero? (complement zero?))
+
+; (not-zero? 0)
 
 (defn say-hi
   ([]
@@ -71,5 +75,61 @@
 ; (say-hi)
 ; (say-hi "Paul")
 
+(def person {:age 42 :name "Paul Webster"})
+(let [age (:age person)]
+  (if age
+    (str "My age is " age)
+    "No age given"))
 
+
+(let [greet (fn [n] (str "Hello, " n))]
+  (map greet '(Paul Remy)))
+
+
+(defn count-item [sequence item]
+  "If empty, return 0.  If found, return +1 of the rest  of the list count.  if not found, return the rest of the list count"
+  (if (not (seq sequence))
+    0
+    (if (= (peek sequence) item)
+      (inc (count-item (pop sequence) item))
+      (count-item (pop sequence) item))))
+
+; recur below says this is tail-recursion
+; we're passing in an accumulater argument ... apparently
+(defn count-item-recur [sequence item accum]
+         (if (not (seq sequence))              
+           accum                                 
+           (if (= (peek sequence) item)          
+             (recur (pop sequence) item (inc accum))
+             (recur (pop sequence) item accum))))   
+
+; function to hide the extra argument
+(defn count-item-hide 
+  [sequence item]
+  (count-item-recur sequence item 0))
+
+(defn count-item-loop [sequence item]
+  (loop [sq sequence, accum 0]
+    (if (not (seq sq))
+      accum
+      (if (= (peek sq) item)
+        (recur (pop sq) (inc accum))
+        (recur (pop sq) accum)))))
+
+(defn count-item-cond 
+  [sequence item]
+  (loop [sq sequence, accum 0]
+    (cond (not (seq sq)) accum
+          (= (peek sq) item) (recur (pop sq) (inc accum))
+          :else (recur (pop sq) accum))))
+
+
+
+; recur below says this is tail-recursion
+(defn member? [sequence item]          
+         (if (not (seq sequence))               
+           nil                                    
+           (if (= (peek sequence) item)           
+             sequence                               
+             (recur (pop sequence) item))))
 
