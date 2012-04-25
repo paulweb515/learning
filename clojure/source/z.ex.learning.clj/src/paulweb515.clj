@@ -13,6 +13,12 @@
                       (Address. "770 Palladium Drive",
                                 "Ottawa"))))
 
+(def paul-person-prov 
+  (let [p paul-person, emp (:employer paul-person), addr (:address emp)]
+    (assoc paul-person :employer 
+           (assoc emp :address 
+                  (assoc addr :province "ON")))))
+
 (def n1 5)
 (def n2 3)
 (defn n-add-five
