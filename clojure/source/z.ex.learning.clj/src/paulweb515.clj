@@ -133,3 +133,29 @@
              sequence                               
              (recur (pop sequence) item))))
 
+
+(defn member-cond?
+  [sequence item]
+  (loop [sq sequence]
+    (cond (not (seq sq)) nil
+          (= (peek sq) item) sq
+          :else (recur (pop sq)))))
+
+(defn count-item-internal-fn 
+  [sequence item]
+  (let [ci (fn [sq accum]
+             (cond (not (seq sq)) accum
+                   (= (peek sq) item) (recur (pop sq) (inc accum))
+                   :else (recur (pop sq) accum)))]
+    (ci sequence 0)))
+
+
+(defn my-vec [in]
+     [in (count in)])
+
+(def my-vec-output
+  (let  [ [word length] (my-vec "Paul") ]
+     (str "I found " length " chars in " word)))
+
+
+
