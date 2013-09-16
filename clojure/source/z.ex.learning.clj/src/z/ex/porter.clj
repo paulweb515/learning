@@ -1,4 +1,4 @@
-(ns porter)
+(ns z.ex.porter)
 
 (defrecord stemmer [word index])
 

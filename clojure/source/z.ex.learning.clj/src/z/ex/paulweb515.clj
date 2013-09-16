@@ -1,4 +1,4 @@
-(ns paulweb515)
+(ns z.ex.paulweb515)
 
 (defrecord Address [street city])
 
