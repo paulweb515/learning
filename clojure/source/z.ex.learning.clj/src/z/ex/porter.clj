@@ -1,4 +1,6 @@
 (ns z.ex.porter)
+; This code is from the Eric Rochester blogs:
+; http://writingcoding.blogspot.com/2008/07/stemming-part-1-introduction.html
 
 (defrecord stemmer [word index])
 
