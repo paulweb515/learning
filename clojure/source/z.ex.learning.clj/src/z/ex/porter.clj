@@ -1,6 +1,9 @@
 (ns z.ex.porter)
 ; This code is from the Eric Rochester blogs:
 ; http://writingcoding.blogspot.com/2008/07/stemming-part-1-introduction.html
+; It's based on the C version from http://tartarus.org/~martin/PorterStemmer/index.html
+; whose license says "...the notes about licensing are never more restrictive
+; than the BSD License"
 
 (defrecord stemmer [word index])
 
